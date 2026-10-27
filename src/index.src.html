@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en" class="no-js" data-alt="es/">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="meta.title">My Financial Compass: Expert Financial Guidance &amp; Advice</title>
+<meta name="description" content="My Financial Compass helps you achieve financial independence. Expert advice, personalized plans, and goal-oriented strategies. Start your journey today!" data-i18n-attr="content:meta.description">
+<link rel="canonical" href="https://www.myfinancialcompass.org/" data-i18n-attr="href:meta.canonical">
+<link rel="alternate" hreflang="en" href="https://www.myfinancialcompass.org/">
+<link rel="alternate" hreflang="es" href="https://www.myfinancialcompass.org/es/">
+<link rel="alternate" hreflang="x-default" href="https://www.myfinancialcompass.org/">
+<meta name="theme-color" content="#DCEBE5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="My Financial Compass">
+<meta property="og:title" content="My Financial Compass: Expert Financial Guidance &amp; Advice" data-i18n-attr="content:meta.title">
+<meta property="og:description" content="My Financial Compass helps you achieve financial independence. Expert advice, personalized plans, and goal-oriented strategies. Start your journey today!" data-i18n-attr="content:meta.description">
+<meta property="og:url" content="https://www.myfinancialcompass.org/" data-i18n-attr="content:meta.canonical">
+<meta property="og:locale" content="en_US" data-i18n-attr="content:meta.locale">
+<meta property="og:locale:alternate" content="es_US" data-i18n-attr="content:meta.localeAlt">
+<meta property="og:image" content="https://www.myfinancialcompass.org/assets/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The My Financial Compass compass rose and wordmark" data-i18n-attr="content:meta.ogAlt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="My Financial Compass: Expert Financial Guidance &amp; Advice" data-i18n-attr="content:meta.title">
+<meta name="twitter:description" content="My Financial Compass helps you achieve financial independence. Expert advice, personalized plans, and goal-oriented strategies. Start your journey today!" data-i18n-attr="content:meta.description">
+<meta name="twitter:image" content="https://www.myfinancialcompass.org/assets/img/og-card.jpg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" media="(min-width: 720px)"
+      imagesrcset="assets/img/wordmark-640.avif 640w, assets/img/wordmark-1080.avif 1080w, assets/img/wordmark-1600.avif 1600w"
+      imagesizes="(min-width: 1180px) 1000px, 88vw">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cabin-normal-latin.woff2" crossorigin>
+<script>
+/* Runs before first paint: language routing (URL > saved > browser), JS flag, intro mode.
+   Redirecting here (instead of swapping text after load) keeps CLS at zero. */
+(function () {
+  var d = document.documentElement, page = d.lang === "es" ? "es" : "en";
+  d.className = d.className.replace("no-js", "js");
+  var q = /[?&]lang=(en|es)(?:&|$)/.exec(location.search), saved = null;
+  try { saved = localStorage.getItem("mfc-lang"); } catch (e) {}
+  var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || "en").toLowerCase();
+  var want = q ? q[1] : (page === "es" ? "es" : (saved === "es" || saved === "en" ? saved : (nav.indexOf("es") === 0 ? "es" : "en")));
+  if (want !== page) {
+    location.replace(d.getAttribute("data-alt") + (q ? "?lang=" + want : "") + location.hash);
+    return;
+  }
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var seen = null;
+    try { seen = sessionStorage.getItem("mfc-intro"); } catch (e) {}
+    d.className += seen ? " intro-short" : " intro-full";
+    try { sessionStorage.setItem("mfc-intro", "1"); } catch (e) {}
+  }
+})();
+</script>
+<style><!--@include css/critical.css--></style>
+<link rel="preload" href="styles.min.css?v=20261026i" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.min.css?v=20261026i"></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="ui.skip">Skip to content</a>
+
+<!-- ================================================================ HEADER -->
+<header class="site-header" data-header>
+  <div class="bar">
+    <a class="brand" href="#home" aria-label="My Financial Compass — Home" data-i18n-attr="aria-label:ui.brandHome">
+      <svg class="mini-compass" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">
+        <circle r="46" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="2.2 2.6"/>
+        <circle r="39" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle r="30" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <g class="mini-star" data-mini-star><path d="M0-36 4.6-4.6 36 0 4.6 4.6 0 36-4.6 4.6-36 0-4.6-4.6Z" fill="currentColor"/><path d="M0-36 0 36M-36 0 36 0" stroke="var(--paper)" stroke-width="1.2"/><circle r="6" fill="var(--paper)" stroke="currentColor" stroke-width="2.5"/></g>
+      </svg>
+      <picture class="brand-word">
+        <source type="image/avif" srcset="assets/img/wordmark-640.avif">
+        <img src="assets/img/wordmark-640.webp" width="640" height="66" alt="" decoding="async">
+      </picture>
+    </a>
+    <nav class="nav" aria-label="Main" data-i18n-attr="aria-label:ui.navMain">
+      <ul>
+        <li><a href="#home" data-i18n="nav.home">Home</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#terms" data-i18n="nav.terms">Additional Terms</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--sm bar-book" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener">
+      <span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span>
+      <svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg>
+    </a>
+    <nav class="lang" aria-label="Language / Idioma" data-lang-switch>
+      <a class="lang-opt" href="index.html?lang=en" hreflang="en" lang="en" aria-label="English" aria-current="true" data-set-lang="en">EN</a>
+      <a class="lang-opt" href="es/?lang=es" hreflang="es" lang="es" aria-label="Español" data-set-lang="es">ES</a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+      <span class="menu-toggle-label" data-i18n="ui.menu">Menu</span>
+      <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu: full-screen chart. The bar above (language switch + close) stays reachable. -->
+<div class="menu" id="menu" hidden data-menu>
+  <div class="menu-chart" aria-hidden="true"></div>
+  <nav class="menu-nav" aria-label="Main" data-i18n-attr="aria-label:ui.navMain">
+    <ol>
+      <li><a href="#home"><span data-i18n="nav.home">Home</span></a></li>
+      <li><a href="#about"><span data-i18n="nav.about">About</span></a></li>
+      <li><a href="#services"><span data-i18n="nav.services">Services</span></a></li>
+      <li><a href="#terms"><span data-i18n="nav.terms">Additional Terms</span></a></li>
+    </ol>
+  </nav>
+  <div class="menu-foot">
+    <a class="btn" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener">
+      <span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span>
+      <svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg>
+    </a>
+    <p><a href="tel:+17575023737">(757) 502 - 3737</a><br><a href="mailto:info@myfinancialcompass.org">info@myfinancialcompass.org</a></p>
+  </div>
+</div>
+
+<!-- ================================================================ VOYAGE BAR -->
+<nav class="voyage" aria-label="Voyage log" data-i18n-attr="aria-label:ui.voyage" data-voyage>
+  <div class="voyage-track">
+    <span class="voyage-line" aria-hidden="true"></span>
+    <span class="voyage-progress" aria-hidden="true" data-voyage-progress></span>
+    <ol>
+      <li><a class="port" href="#home"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.home">Home</span></span></a></li>
+      <li><a class="port" href="#about"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.about">Who we are</span></span></a></li>
+      <li><a class="port" href="#values"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.values">Our Values</span></span></a></li>
+      <li><a class="port" href="#apart"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.apart">What Sets Us Apart</span></span></a></li>
+      <li><a class="port" href="#mission"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.mission">Our Mission</span></span></a></li>
+      <li><a class="port" href="#captain"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.captain">the brains behind my financial compass</span></span></a></li>
+      <li><a class="port" href="#services"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.services">Services</span></span></a></li>
+      <li><a class="port" href="#contact"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.contact">Contact us</span></span></a></li>
+      <li><a class="port" href="#terms"><span class="port-mark" aria-hidden="true"></span><span class="port-label"><span data-i18n="port.terms">Additional Terms</span></span></a></li>
+    </ol>
+    <svg class="voyage-ship" viewBox="0 0 40 34" aria-hidden="true" focusable="false" data-voyage-ship>
+      <path d="M4 22h32l-3.5 6.5Q20 31 7.5 28.5ZM4 22v-4.5h6V22" fill="currentColor"/>
+      <path d="M13 22V9M21 22V4M29 22V10" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      <path class="vs-sails" d="M13 10.5q6 4.5 0 9.5ZM21 6q7.5 6 0 12ZM29 11.5q5.5 4 0 8.5Z" fill="var(--paper)" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M21 4l4.5 1.2L21 6.4Z" fill="var(--forest)"/>
+    </svg>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ================================================================ 01 HERO -->
+<section id="home" class="hero" aria-labelledby="hero-title" data-bearing="0">
+  <div class="hero-inner">
+    <div class="hero-rose-wrap">
+      <svg class="hero-rhumbs" viewBox="-1000 -1000 2000 2000" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <g stroke="currentColor" fill="none" vector-effect="non-scaling-stroke">
+          <path d="M0-1000V1000M-1000 0H1000M-707-707 707 707M707-707-707 707M-383-924 383 924M383-924-383 924M-924-383 924 383M924-383-924 383" vector-effect="non-scaling-stroke"/>
+          <circle r="430" vector-effect="non-scaling-stroke" stroke-dasharray="2 6"/>
+          <circle r="760" vector-effect="non-scaling-stroke"/>
+        </g>
+      </svg>
+      <div class="hero-rose" data-hero-rose><!--@include partials/compass-hero.svg--></div>
+    </div>
+    <h1 id="hero-title" class="hero-title">
+      <span class="sr-only">MY FINANCIAL COMPASS</span>
+      <picture>
+        <source type="image/avif" srcset="assets/img/wordmark-640.avif 640w, assets/img/wordmark-1080.avif 1080w, assets/img/wordmark-1600.avif 1600w" sizes="(min-width: 1180px) 1000px, 88vw">
+        <source type="image/webp" srcset="assets/img/wordmark-640.webp 640w, assets/img/wordmark-1080.webp 1080w, assets/img/wordmark-1600.webp 1600w" sizes="(min-width: 1180px) 1000px, 88vw">
+        <img class="hero-wordmark" src="assets/img/wordmark-1080.png" srcset="assets/img/wordmark-640.png 640w, assets/img/wordmark-1080.png 1080w, assets/img/wordmark-1600.png 1600w" sizes="(min-width: 1180px) 1000px, 88vw" width="1600" height="166" alt="" fetchpriority="high">
+      </picture>
+      <span class="curtain" aria-hidden="true"></span>
+    </h1>
+    <p class="hero-sub"><span data-i18n="hero.sub">What direction is your money going?</span><span class="curtain" aria-hidden="true"></span></p>
+    <div class="hero-actions">
+      <a class="btn" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener">
+        <span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span>
+        <svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true">
+    <svg class="sea sea--back" viewBox="0 0 1200 60" preserveAspectRatio="none" focusable="false"><path d="M0 30c25-9 50-9 75 0s50 9 75 0 50-9 75 0 50 9 75 0 50-9 75 0 50 9 75 0 50-9 75 0 50 9 75 0 50-9 75 0 50 9 75 0 50-9 75 0 50 9 75 0 50-9 75 0 50 9 75 0 50-9 75 0 50 9 75 0M0 44c18-6 37-6 56 0s37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 37-6 56 0 37 6 56 0 18-3 32-3"/></svg>
+    <svg class="sea sea--mid" viewBox="0 0 1200 60" preserveAspectRatio="none" focusable="false"><path d="M0 24c30-11 60-11 90 0s60 11 90 0 60-11 90 0 60 11 90 0 60-11 90 0 60 11 90 0 60-11 90 0 60 11 90 0 60-11 90 0 60 11 90 0 60-11 90 0 60 11 90 0 60-11 90 0 60 11 90 0M10 40c14-4 28-4 42 0m30 2c20-5 40-5 60 0m40-3c16-4 32-4 48 0m50 3c22-5 44-5 66 0m36-3c14-3 28-3 42 0m60 3c20-5 40-5 60 0m30-2c18-4 36-4 54 0m52 2c22-5 44-5 66 0m34-3c14-3 28-3 42 0m48 3c20-5 40-5 60 0m36-2c16-4 32-4 48 0"/></svg>
+    <div class="ship ship--hero" data-ship="hero">
+      <img class="ship-layer ship-waves" src="assets/img/ship-waves.svg" width="760" height="117" alt="" decoding="async" fetchpriority="low">
+      <img class="ship-layer ship-hull" src="assets/img/ship-hull.svg" width="665" height="270" alt="" decoding="async" fetchpriority="low">
+      <img class="ship-layer ship-rig ship-rig-l" src="assets/img/ship-rig-l.svg" width="391" height="543" alt="" decoding="async" fetchpriority="low">
+      <img class="ship-layer ship-rig ship-rig-r" src="assets/img/ship-rig-r.svg" width="422" height="484" alt="" decoding="async" fetchpriority="low">
+      <img class="ship-layer ship-flag" src="assets/img/ship-flag.svg" width="116" height="65" alt="" decoding="async" fetchpriority="low">
+    </div>
+    <svg class="sea sea--front" viewBox="0 0 1200 60" preserveAspectRatio="none" focusable="false"><path d="M0 20c22-8 44-8 66 0s44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0 44 8 66 0 24-8 48-8M30 36c12-3 24-3 36 0m52 4c18-4 36-4 54 0m44-4c12-3 24-3 36 0m70 4c18-4 36-4 54 0m40-4c12-3 24-3 36 0m66 4c18-4 36-4 54 0m44-4c12-3 24-3 36 0m70 4c18-4 36-4 54 0m40-4c12-3 24-3 36 0m66 4c18-4 36-4 54 0"/></svg>
+  </div>
+</section>
+
+<!-- ================================================================ 02 ABOUT --><section id="about" class="sec sec--dark about" aria-labelledby="about-title" data-bearing="45">
+  <figure class="wrap horizon-photo" data-photo>
+    <div class="horizon-photo-frame">
+      <picture>
+        <source media="(max-width: 719px)" type="image/avif" srcset="assets/img/familia-costa-m-600.avif 600w, assets/img/familia-costa-m-900.avif 900w" sizes="calc(100vw - 32px)">
+        <source media="(max-width: 719px)" type="image/webp" srcset="assets/img/familia-costa-m-600.webp 600w, assets/img/familia-costa-m-900.webp 900w" sizes="calc(100vw - 32px)">
+        <source type="image/avif" srcset="assets/img/familia-costa-800.avif 800w, assets/img/familia-costa-1400.avif 1400w, assets/img/familia-costa-2000.avif 2000w" sizes="(min-width: 1280px) 1160px, 92vw">
+        <source type="image/webp" srcset="assets/img/familia-costa-800.webp 800w, assets/img/familia-costa-1400.webp 1400w, assets/img/familia-costa-2000.webp 2000w" sizes="(min-width: 1280px) 1160px, 92vw">
+        <img src="assets/img/familia-costa-1400.webp" width="1400" height="934" alt="A family on the coast looking out to sea through a spyglass" data-i18n-attr="alt:about.photoAlt" loading="lazy" decoding="async">
+      </picture>
+      <span class="portrait-corner portrait-corner--tl" aria-hidden="true"></span>
+      <span class="portrait-corner portrait-corner--br" aria-hidden="true"></span>
+    </div>
+  </figure>
+  <div class="wrap about-grid">
+    <header class="sec-head">
+      <h2 id="about-title" class="h2" data-split data-i18n="about.title">Who we are</h2>
+    </header>
+    <div class="about-body">
+      <svg class="rule-rhumb" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true" focusable="false" data-draw-line><path pathLength="1" d="M0 12H600"/><path class="ticks" pathLength="1" d="M60 6v12M120 9v6M180 6v12M240 9v6M300 3v18M360 9v6M420 6v12M480 9v6M540 6v12"/></svg>
+      <p class="lede reveal" data-i18n="about.body">At My Financial Compass, we are dedicated to guiding you toward financial independence as we believe that everyone deserves a clear path to reach their financial goals, regardless of their starting point. As financial accountability partners, we personally guide you and empower you to take control of your finances and navigate your unique journey confidently to reach the destination <span class="you">YOU</span> want for your hard-earned income.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ 03 VALUES -->
+<section id="values" class="sec values" aria-labelledby="values-title" data-bearing="90">
+  <div class="wrap values-stage" data-values>
+    <header class="sec-head values-head">
+      <h2 id="values-title" class="h2" data-split data-i18n="values.title">Our Values</h2>
+    </header>
+    <div class="values-rose" data-values-rose aria-hidden="true"></div>
+    <article class="value value--n" data-value="0">
+      <p class="value-dir" data-i18n="values.n">N · 000°</p>
+      <h3 class="h3" data-i18n="values.vision.t">Vision:</h3>
+      <p data-i18n="values.vision.d">We see a future where everyone can achieve financial freedom.</p>
+    </article>
+    <article class="value value--e" data-value="1">
+      <p class="value-dir" data-i18n="values.e">E · 090°</p>
+      <h3 class="h3" data-i18n="values.perseverance.t">Perseverance:</h3>
+      <p data-i18n="values.perseverance.d">We are committed to helping you overcome obstacles and stay the course.</p>
+    </article>
+    <article class="value value--s" data-value="2">
+      <p class="value-dir" data-i18n="values.s">S · 180°</p>
+      <h3 class="h3" data-i18n="values.determination.t">Determination:</h3>
+      <p data-i18n="values.determination.d">We believe in your potential to succeed and will support you every step of the way.</p>
+    </article>
+    <article class="value value--w" data-value="3">
+      <p class="value-dir" data-i18n="values.w">W · 270°</p>
+      <h3 class="h3" data-i18n="values.achievement.t">Achievement:</h3>
+      <p data-i18n="values.achievement.d">We celebrate your milestones and are dedicated to helping you reach new heights.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================================================================ 04 WHAT SETS US APART -->
+<section id="apart" class="sec sec--sage apart" aria-labelledby="apart-title" data-bearing="135">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 id="apart-title" class="h2" data-split data-i18n="apart.title">What Sets Us Apart</h2>
+    </header>
+    <div class="legs" data-legs>
+      <svg class="legs-route" aria-hidden="true" focusable="false" data-legs-route><path class="route-base"/><path class="route-ink"/></svg>
+      <ol>
+        <li class="leg reveal">
+          <span class="leg-mark" aria-hidden="true"></span>
+          <h3 class="h3" data-i18n="apart.1.t">Personalized Approach:</h3>
+          <p data-i18n="apart.1.d">Your financial journey is unique. We tailor our coaching and strategies to your specific needs and goals.</p>
+        </li>
+        <li class="leg reveal">
+          <span class="leg-mark" aria-hidden="true"></span>
+          <h3 class="h3" data-i18n="apart.2.t">Holistic Guidance:</h3>
+          <p data-i18n="apart.2.d">We address all aspects of your financial life, from budgeting and saving to investing and retirement planning. Creating Target maps for YOU that are achievable and realistic.</p>
+        </li>
+        <li class="leg reveal">
+          <span class="leg-mark" aria-hidden="true"></span>
+          <h3 class="h3" data-i18n="apart.3.t">Unwavering Support:</h3>
+          <p data-i18n="apart.3.d">We are your trusted partners on this journey. Our team is here to provide ongoing support and guidance.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ 05 MISSION -->
+<section id="mission" class="sec mission" aria-labelledby="mission-title" data-bearing="180">
+  <div class="wrap">
+    <header class="sec-head sec-head--center">
+      <h2 id="mission-title" class="h2 h2--small" data-i18n="mission.title">Our Mission</h2>
+    </header>
+    <p class="mission-statement" data-words data-i18n="mission.body">To empower individuals to take control of their financial future and achieve lasting financial independence.</p>
+    <p class="mission-join reveal"><strong data-i18n="mission.join">Join us at My Financial Compass and let's embark on a journey to financial independence together!</strong></p>
+    <p class="mission-cta reveal">
+      <a class="btn btn--ghost" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener">
+        <span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span>
+        <svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg>
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================ 06 THE CAPTAIN -->
+<section id="captain" class="sec sec--dark captain" aria-labelledby="captain-title" data-bearing="225">
+  <div class="wrap captain-grid">
+    <header class="sec-head captain-head">
+      <h2 id="captain-title" class="h2" data-split data-i18n="captain.title">the brains behind my financial compass</h2>
+    </header>
+    <figure class="portrait reveal">
+      <picture>
+        <source type="image/avif" srcset="assets/img/jacobo-laya-360.avif 360w, assets/img/jacobo-laya-560.avif 560w" sizes="(min-width: 960px) 380px, 70vw">
+        <img src="assets/img/jacobo-laya-560.webp" srcset="assets/img/jacobo-laya-360.webp 360w, assets/img/jacobo-laya-560.webp 560w" sizes="(min-width: 960px) 380px, 70vw" width="560" height="725" alt="Portrait of Jacobo Laya Jr, founder of My Financial Compass" data-i18n-attr="alt:captain.photoAlt" loading="lazy" decoding="async">
+      </picture>
+      <span class="portrait-corner portrait-corner--tl" aria-hidden="true"></span>
+      <span class="portrait-corner portrait-corner--br" aria-hidden="true"></span>
+    </figure>
+    <div class="captain-stats" aria-hidden="true">
+      <p class="stat"><span class="stat-num" data-count="20">20</span><span class="stat-label" data-i18n="captain.stat1">-year Navy veteran</span></p>
+      <p class="stat"><span class="stat-num" data-count="17">17</span><span class="stat-label" data-i18n="captain.stat2">years · Jac&amp;Mac Photography</span></p>
+    </div>
+    <div class="captain-body">
+      <p class="reveal" data-i18n="captain.p1">Meet Jacobo Laya Jr, the founder of My Financial Compass, a 20-year Navy veteran who served as Operations Specialist and Command Financial Specialist. During his service, Jacobo honed his skills in proper money management, counseling sailors of all ranks and their families.</p>
+      <p class="reveal" data-i18n="captain.p2">Jacobo's passion for financial guidance extends beyond his military career. He holds a Master of Business Administration from Excelsior College and has been a successful business owner of Jac&amp;Mac Photography for more than 17 years.</p>
+      <p class="reveal" data-i18n="captain.p3">His expertise and dedication have earned him recognition in the Marquis's Who's Who as Professional Entrepreneur of the Year.</p>
+      <p class="reveal" data-i18n="captain.p4">At My Financial Compass, Jacobo's leadership and experience guide our mission to empower individuals on their journey to financial independence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ 07 SERVICES -->
+<section id="services" class="sec sec--sage services" aria-labelledby="services-title" data-bearing="270">
+  <div class="wrap">
+    <header class="sec-head services-head">
+      <h2 id="services-title" class="h2" data-split data-i18n="services.title">Services</h2>
+    </header>
+    <article class="feature reveal" aria-labelledby="svc-1">
+      <p class="feature-kicker" data-i18n="services.featured">Featured program</p>
+      <h3 id="svc-1" class="feature-name" data-i18n="svc.1">My Financial Compass Independence Seminars &amp; Webinars</h3>
+      <p class="feature-desc" data-i18n="svcd.1">My Financial Compass loves to provide in person seminars and online webinars workshops. These are gateways to financial learning, education, and freedom. We'll equip your clients, employees, Church or organization with the knowledge and tools to manage their money effectively and achieve their financial goals. Reach out to us, we provide our presentations online or in person throughout Virginia, Maryland, Pennsylvania.</p>
+      <div class="feature-side">
+        <p class="feature-price">$750.00</p>
+        <a class="btn" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener"><span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span><svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg></a>
+      </div>
+      <span class="feature-corner feature-corner--tl" aria-hidden="true"></span><span class="feature-corner feature-corner--br" aria-hidden="true"></span>
+    </article>
+    <div class="ledger" data-ledger>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.2">Retirement Planning</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.2">Plan for a comfortable and fulfilling retirement with our Retirement Planning service. We'll help you define your retirement goals, develop a comprehensive plan, and navigate the complexities of retirement income.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.3">Annuities</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.3">Secure your financial future with our Annuities service. We'll help you explore different annuity options and find the best solution to provide a steady stream of income during retirement.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.4">Business Planning</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.4">Transform your business vision into reality with our comprehensive Business Planning service. We'll guide you through every step, from concept to execution, helping you build a successful and sustainable enterprise.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.10">Small Business</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.10">Your business and your personal finances are connected. We'll help small business owners build healthy money habits, manage cash flow, and protect what they've built for themselves and their families.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.5">Career Planning</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.5">Getting ready to go into college? Don’t know what career field you want to specialize in? Want to find the right job for you? Transferring from active military or retiring from the military and don’t know how to transfer your military skills to civilian work? How to use your knowledge and skills to land your dream job? At My Financial Compass, we specialize on guiding, mentoring, preparing, and helping you land the job you want. Your future is in your hands, but with some guidance, you can be confident to heading in the right direction in your career and in Life.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.6">Life Insurance w/ Living Benefits</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.6">Protect your family's future and enjoy financial flexibility with our Life Insurance with Living Benefits. We'll help you find a policy that provides a safety net for your loved ones while offering valuable benefits you can use during your lifetime.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.7">Family Protection Plan</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.7">Protect your loved ones' financial future with our Family Protection Plan. We'll help you assess your needs and develop a comprehensive plan to ensure your family is financially secure, no matter what the future holds.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.8">Debt Reduction Planning</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.8">Take control of your debt and chart a course toward a debt-free future. Our Debt Reduction Planning service provides personalized strategies and expert guidance to help you eliminate debt and achieve financial freedom.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+      <details class="row" name="svc">
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.9">Financial Needs Analysis</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.9">Uncover your financial direction with our comprehensive Financial Needs Analysis. We'll help you identify your goals, assess your current situation, and create a roadmap to achieve financial independence.</p></div>
+        <span class="row-rhumb" aria-hidden="true"></span>
+      </details>
+    </div>
+    <div class="services-foot">
+      <a class="btn btn--ghost" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener"><span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span><svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ 08 CONTACT -->
+<section id="contact" class="sec contact" aria-labelledby="contact-title" data-bearing="315">
+  <div class="wrap contact-grid">
+    <header class="sec-head contact-head">
+      <h2 id="contact-title" class="h2" data-split data-i18n="contact.title">Contact us</h2>
+      <p class="contact-intro reveal" data-i18n="contact.body">Interested in working together? Fill out some info and we will be in touch shortly. We can't wait to hear from you!</p>
+    </header>
+
+    <form class="form reveal" action="contact.php" method="post" novalidate data-form>
+      <fieldset class="field-row">
+        <legend class="label"><span data-i18n="form.name">Name</span> <span class="req" data-i18n="form.required">(required)</span></legend>
+        <div class="field">
+          <label class="sublabel" for="f-first" data-i18n="form.first">First Name</label>
+          <input id="f-first" name="first_name" type="text" autocomplete="given-name" required maxlength="80" aria-describedby="e-first">
+          <p class="field-error" id="e-first" data-i18n="form.err.first">Enter your first name.</p>
+        </div>
+        <div class="field">
+          <label class="sublabel" for="f-last" data-i18n="form.last">Last Name</label>
+          <input id="f-last" name="last_name" type="text" autocomplete="family-name" required maxlength="80" aria-describedby="e-last">
+          <p class="field-error" id="e-last" data-i18n="form.err.last">Enter your last name.</p>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label class="label" for="f-email"><span data-i18n="form.email">Email</span> <span class="req" data-i18n="form.required">(required)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="160" aria-describedby="e-email">
+        <p class="field-error" id="e-email" data-i18n="form.err.email">Enter a valid email address, like name@domain.com.</p>
+        <label class="check"><input type="checkbox" name="newsletter" value="yes"><span class="check-box" aria-hidden="true"></span><span data-i18n="form.newsletter">Sign up for news and updates</span></label>
+      </div>
+      <div class="field-row field-row--pair">
+        <div class="field">
+          <label class="label" for="f-phone"><span data-i18n="form.phone">Phone</span> <span class="req" data-i18n="form.optional">(optional)</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" aria-describedby="e-phone">
+          <p class="field-error" id="e-phone" data-i18n="form.err.phone">Enter a valid phone number, or leave it blank.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="f-service"><span data-i18n="form.service">Service of interest</span> <span class="req" data-i18n="form.optional">(optional)</span></label>
+          <div class="select">
+            <select id="f-service" name="service">
+              <option value="" data-i18n="form.servicePick">Select a service</option>
+              <option value="seminars" data-i18n="svc.1">My Financial Compass Independence Seminars &amp; Webinars</option>
+              <option value="retirement" data-i18n="svc.2">Retirement Planning</option>
+              <option value="annuities" data-i18n="svc.3">Annuities</option>
+              <option value="business" data-i18n="svc.4">Business Planning</option>
+              <option value="small-business" data-i18n="svc.10">Small Business</option>
+              <option value="career" data-i18n="svc.5">Career Planning</option>
+              <option value="life-insurance" data-i18n="svc.6">Life Insurance w/ Living Benefits</option>
+              <option value="family-protection" data-i18n="svc.7">Family Protection Plan</option>
+              <option value="debt" data-i18n="svc.8">Debt Reduction Planning</option>
+              <option value="needs-analysis" data-i18n="svc.9">Financial Needs Analysis</option>
+              <option value="not-sure" data-i18n="form.serviceUnsure">I'm not sure yet</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="f-msg"><span data-i18n="form.message">Message</span> <span class="req" data-i18n="form.required">(required)</span></label>
+        <textarea id="f-msg" name="message" rows="5" required maxlength="4000" aria-describedby="e-msg"></textarea>
+        <p class="field-error" id="e-msg" data-i18n="form.err.message">Enter a message.</p>
+      </div>
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <input type="hidden" name="lang" value="en" data-i18n-attr="value:form.langValue">
+      <input type="hidden" name="ts" value="" data-form-ts>
+      <div class="form-foot">
+        <button class="btn" type="submit" data-submit><span data-i18n="form.submit">Submit</span><svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg></button>
+        <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+      </div>
+      <p class="form-note" data-i18n="form.privacy">We'll only use your information to reply to you. See our <a href="#privacy" data-open-privacy>Privacy Policy</a>.</p>
+    </form>
+
+    <aside class="harbor" aria-labelledby="harbor-book">
+      <div class="harbor-scene" aria-hidden="true">
+        <div class="ship ship--port" data-ship="port">
+          <img class="ship-layer ship-waves" src="assets/img/ship-waves.svg" width="760" height="117" alt="" loading="lazy" decoding="async">
+          <img class="ship-layer ship-hull" src="assets/img/ship-hull.svg" width="665" height="270" alt="" loading="lazy" decoding="async">
+          <img class="ship-layer ship-rig ship-rig-l" src="assets/img/ship-rig-l.svg" width="391" height="543" alt="" loading="lazy" decoding="async">
+          <img class="ship-layer ship-rig ship-rig-r" src="assets/img/ship-rig-r.svg" width="422" height="484" alt="" loading="lazy" decoding="async">
+          <img class="ship-layer ship-flag" src="assets/img/ship-flag.svg" width="116" height="65" alt="" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <a class="btn btn--block" id="harbor-book" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener">
+        <span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span>
+        <svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg>
+      </a>
+      <dl class="harbor-contact">
+        <div><dt data-i18n="contact.phone">phone</dt><dd><a href="tel:+17575023737">(757) 502 - 3737</a></dd></div>
+        <div><dt data-i18n="contact.email">email</dt><dd><a href="mailto:info@myfinancialcompass.org">info@myfinancialcompass.org</a></dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<!-- ================================================================ 09 ADDITIONAL TERMS -->
+<section id="terms" class="sec terms" aria-labelledby="terms-title" data-bearing="360">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 id="terms-title" class="h2 h2--small" data-i18n="nav.terms">Additional Terms</h2>
+    </header>
+    <div class="terms-grid">
+      <div class="disclaimer">
+        <h3 class="h4" data-i18n="terms.disc.t">My Financial Compass Disclaimer:</h3>
+        <p data-i18n="terms.disc.1">The information provided on this website is for general informational purposes only and does not constitute financial, investment, legal, tax, or accounting advice. It is intended for residents of Virginia, Pennsylvania, Texas, Tennessee, and Florida, where My Financial Compass is licensed to provide services. Before making any financial decisions, you should consult with a qualified professional.</p>
+        <p data-i18n="terms.disc.2">My Financial Compass does not guarantee the accuracy, completeness, or reliability of any information on this website. Any reliance you place on such information is strictly at your own risk. Past performance is not indicative of future results.</p>
+        <h3 class="h4" data-i18n="terms.nw.t">No Warranties:</h3>
+        <p data-i18n="terms.nw.d">My Financial Compass and its employees disclaim all warranties, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement. We are not responsible for any errors or omissions on this website or for any damages arising from the use of this information.</p>
+        <h3 class="h4" data-i18n="terms.ll.t">Limitation of Liability:</h3>
+        <p data-i18n="terms.ll.d">My Financial Compass will not be liable for any damages of any kind arising from the use of this website, including but not limited to direct, indirect, incidental, punitive, and consequential damages.</p>
+        <p class="disclaimer-cta"><a href="#contact"><strong data-i18n="terms.touch">Get in touch with us for more information on our services and to schedule your free initial consultation.</strong></a></p>
+      </div>
+      <div class="agreement">
+        <h3 class="h4 agreement-kicker" data-i18n="terms.add">ADDITIONAL TERMS</h3>
+        <p class="agreement-title"><strong data-i18n="terms.sub">Terms &amp; Services and Privacy Policy</strong></p>
+        <p class="terms-note" data-i18n="terms.note"></p>
+        <div class="accordion">
+          <details>
+            <summary><span data-i18n="terms.accept.t">Acceptance of Terms</span></summary>
+            <div class="details-body"><p data-i18n="terms.accept.d">By accessing or using the My Financial Compass website (the "Site"), you agree to be bound by these Terms &amp; Services and Privacy Policy (the "Agreement"). If you do not agree to these terms, please do not use the Site.</p></div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.services.t">Services</span></summary>
+            <div class="details-body"><p data-i18n="terms.services.d">My Financial Compass provides financial consulting services, including but not limited to financial planning, investment advice, and retirement planning. Our services are intended to provide general guidance and information, and do not constitute legal, tax, or accounting advice. You should consult with a qualified professional for such advice.</p></div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.use.t">Use of Site</span></summary>
+            <div class="details-body">
+              <p data-i18n="terms.use.d">You may use the Site for lawful purposes only. You may not use the Site:</p>
+              <ul>
+                <li data-i18n="terms.use.1">In any way that violates any applicable federal, state, local, or international law or regulation.</li>
+                <li data-i18n="terms.use.2">To transmit, or procure the sending of, any advertising or promotional material, including any "junk mail," "chain letter," "spam," or any other similar solicitation.</li>
+                <li data-i18n="terms.use.3">To impersonate or attempt to impersonate My Financial Compass, a My Financial Compass employee, another user, or any other person or entity.</li>
+                <li data-i18n="terms.use.4">To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Site, or which, as determined by us, may harm My Financial Compass or users of the Site or expose them to liability.</li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.ip.t">Intellectual Property</span></summary>
+            <div class="details-body"><p data-i18n="terms.ip.d">The Site and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio, and the design, selection, and arrangement thereof) are owned by My Financial Compass, its licensors, or other providers of such material and are protected by United States and international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p></div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.disclaimer.t">Disclaimer</span></summary>
+            <div class="details-body">
+              <p data-i18n="terms.disclaimer.1">The information on the Site is provided for general informational purposes only and does not constitute financial, investment, legal, tax, or accounting advice. You should consult with a qualified professional before making any financial decisions.</p>
+              <p data-i18n="terms.disclaimer.2">My Financial Compass makes no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the Site or the information, products, services, or related graphics contained on the Site for any purpose. Any reliance you place on such information is therefore strictly at your own risk.</p>
+            </div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.liability.t">Limitation of Liability</span></summary>
+            <div class="details-body"><p data-i18n="terms.liability.d">In no event will My Financial Compass, its affiliates, or their licensors, service providers, employees, agents, officers, or directors be liable for damages of any kind, under any legal theory, arising out of or in connection with your use, or inability to use, the Site, any websites linked to it, any content on the Site or such other websites, or any services or items obtained through the Site or such other websites, including any direct, indirect, special, incidental, consequential, or punitive damages, including but not limited to, personal injury, pain and suffering, emotional distress, loss of revenue, loss of profits, loss of business or anticipated savings, loss of use, loss of goodwill, loss of data, and whether caused by tort (including negligence), breach of contract, or otherwise, even if foreseeable.</p></div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.indem.t">Indemnification</span></summary>
+            <div class="details-body"><p data-i18n="terms.indem.d">You agree to defend, indemnify, and hold harmless My Financial Compass, its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms of Service or your use of the Site, including, but not limited to, your User Contributions, any use of the Site's content, services, and products other than as expressly authorized in these Terms of Service, or your use of any information obtained from the Site.</p></div>
+          </details>
+          <details id="privacy">
+            <summary><span data-i18n="terms.privacy.t">Privacy Policy</span></summary>
+            <div class="details-body">
+              <p data-i18n="terms.privacy.d">My Financial Compass is committed to protecting your privacy. This Privacy Policy describes how we collect, use, and disclose your personal information.</p>
+              <h4 class="h5" data-i18n="terms.collect.t">Information We Collect</h4>
+              <p data-i18n="terms.collect.d">We collect personal information that you provide to us, such as your name, email address, and phone number. We also collect information about your use of the Site, such as your IP address and browsing history.</p>
+              <h4 class="h5" data-i18n="terms.useinfo.t">Use of Information</h4>
+              <p data-i18n="terms.useinfo.d">We use your personal information to provide and improve our services, to communicate with you, and to comply with legal obligations.</p>
+              <h4 class="h5" data-i18n="terms.disclose.t">Disclosure of Information</h4>
+              <p data-i18n="terms.disclose.d">We may disclose your personal information to our affiliates, service providers, and other third parties as required by law or to provide our services.</p>
+              <h4 class="h5" data-i18n="terms.security.t">Data Security</h4>
+              <p data-i18n="terms.security.d">We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure.</p>
+              <h4 class="h5" data-i18n="terms.rights.t">Your Privacy Rights</h4>
+              <p data-i18n="terms.rights.d">You have the right to access, correct, or delete your personal information. You also have the right to object to the processing of your personal information.</p>
+            </div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.changes.t">Changes to This Agreement</span></summary>
+            <div class="details-body"><p data-i18n="terms.changes.d">We may update this Agreement from time to time. We will post any changes on the Site.</p></div>
+          </details>
+          <details>
+            <summary><span data-i18n="terms.contact.t">Contact Us</span></summary>
+            <div class="details-body"><p data-i18n="terms.contact.d">If you have any questions about this Agreement, please contact us at info@myfinancialcompass.com.</p></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================================================================ FOOTER -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <p class="footer-brand" data-i18n="footer.brand">my financial compass</p>
+    <dl class="footer-contact">
+      <div><dt data-i18n="contact.phone">phone</dt><dd><a href="tel:+17575023737">(757) 502 - 3737</a></dd></div>
+      <div><dt data-i18n="contact.email">email</dt><dd><a href="mailto:info@myfinancialcompass.org">info@myfinancialcompass.org</a></dd></div>
+    </dl>
+    <ul class="social">
+      <li><a href="https://www.facebook.com/profile.php?id=100002266786952" target="_blank" rel="noopener" aria-label="Facebook" data-i18n-attr="aria-label:social.fb">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.25"/><path d="M13.4 19.6v-7h2.2l.35-2.5H13.4V8.6c0-.75.3-1.25 1.3-1.25h1.35V5.1c-.3-.05-1.1-.12-2-.12-2 0-3.3 1.2-3.3 3.4v1.75H8.6v2.5h2.15v7"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/jacobo-laya-jr-75203a48/" target="_blank" rel="noopener" aria-label="LinkedIn" data-i18n-attr="aria-label:social.li">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.25" y="2.25" width="19.5" height="19.5" rx="2.5"/><path d="M7.4 10.4v6.4M7.4 7.3v.05M11.1 16.8v-6.4M11.1 13.4c0-1.9 1.05-2.9 2.5-2.9 1.4 0 2.2.95 2.2 2.9v3.4"/></svg></a></li>
+      <li><a href="https://www.facebook.com/groups/2041285569349513" target="_blank" rel="noopener" aria-label="Facebook Group" data-i18n-attr="aria-label:social.group">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.6" r="2.7"/><path d="M7.2 18.4c0-2.8 2.1-4.6 4.8-4.6s4.8 1.8 4.8 4.6"/><circle cx="5.3" cy="10.3" r="2"/><path d="M1.8 17.6c0-2 1.4-3.5 3.5-3.5"/><circle cx="18.7" cy="10.3" r="2"/><path d="M22.2 17.6c0-2-1.4-3.5-3.5-3.5"/></svg></a></li>
+    </ul>
+    <nav class="footer-nav" aria-label="Footer" data-i18n-attr="aria-label:ui.navFooter">
+      <a href="#home" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#terms" data-i18n="nav.terms">Additional Terms</a>
+    </nav>
+    <p class="footer-copy" data-i18n="footer.copy">My Financial Compass Copyright © <span data-year>2026</span></p>
+  </div>
+</footer>
+
+<div hidden data-strings>
+  <span data-str="sending" data-i18n="form.sending">Sending…</span>
+  <span data-str="success" data-i18n="form.success">Thank you!</span>
+  <span data-str="error" data-i18n="form.error">Unable to submit form. Please try again later.</span>
+  <span data-str="summary" data-i18n="form.summary">Check the highlighted fields.</span>
+  <span data-str="menu" data-i18n="ui.menu">Menu</span>
+  <span data-str="close" data-i18n="ui.close">Close</span>
+</div>
+<button class="intro-skip" type="button" hidden data-intro-skip data-i18n="ui.skipIntro">Skip intro</button>
+<script>
+/* main.js only adds behaviour on top of a complete page: it is fetched after the first paint */
+(function () {
+  var done = false;
+  function load() {
+    if (done) return; done = true;
+    var s = document.createElement("script");
+    s.src = "main.min.js?v=20261026i";
+    document.body.appendChild(s);
+  }
+  requestAnimationFrame(function () { setTimeout(load, 0); });
+  setTimeout(load, 1200);
+})();
+</script>
+</body>
+</html>
