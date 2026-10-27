@@ -52,11 +52,23 @@
     d.className += seen ? " intro-short" : " intro-full";
     try { sessionStorage.setItem("mfc-intro", "1"); } catch (e) {}
   }
+  // EN / ES tapped before main.js is ready: don't reload the page (that restarts the intro and the scroll);
+  // show the choice at once and let main.js apply it in place as soon as it loads (window.__mfcWant).
+  d.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("[data-set-lang]");
+    if (!a || window.__mfcSetLang) return; // once main.js is up, its own handler takes the click
+    e.preventDefault();
+    window.__mfcWant = a.getAttribute("data-set-lang");
+    var all = document.querySelectorAll("[data-set-lang]");
+    for (var i = 0; i < all.length; i++) { if (all[i] === a) all[i].setAttribute("aria-current", "true"); else all[i].removeAttribute("aria-current"); }
+    var href = a.href;
+    setTimeout(function () { if (window.__mfcWant && !window.__mfcSetLang) location.href = href; }, 5000); // JS never came: use the real page
+  }, true);
 })();
 </script>
 <style><!--@include css/critical.css--></style>
-<link rel="preload" href="styles.min.css?v=20261026i" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="styles.min.css?v=20261026i"></noscript>
+<link rel="preload" href="styles.min.css?v=20261027a" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.min.css?v=20261027a"></noscript>
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to content</a>
@@ -198,7 +210,7 @@
         <source media="(max-width: 719px)" type="image/webp" srcset="assets/img/familia-costa-m-600.webp 600w, assets/img/familia-costa-m-900.webp 900w" sizes="calc(100vw - 32px)">
         <source type="image/avif" srcset="assets/img/familia-costa-800.avif 800w, assets/img/familia-costa-1400.avif 1400w, assets/img/familia-costa-2000.avif 2000w" sizes="(min-width: 1280px) 1160px, 92vw">
         <source type="image/webp" srcset="assets/img/familia-costa-800.webp 800w, assets/img/familia-costa-1400.webp 1400w, assets/img/familia-costa-2000.webp 2000w" sizes="(min-width: 1280px) 1160px, 92vw">
-        <img src="assets/img/familia-costa-1400.webp" width="1400" height="934" alt="A family on the coast looking out to sea through a spyglass" data-i18n-attr="alt:about.photoAlt" loading="lazy" decoding="async">
+        <img src="assets/img/familia-costa-1400.webp" width="1400" height="934" alt="A family on the coast looking out to sea through a spyglass" data-i18n-attr="alt:about.photoAlt" fetchpriority="low" decoding="async">
       </picture>
       <span class="portrait-corner portrait-corner--tl" aria-hidden="true"></span>
       <span class="portrait-corner portrait-corner--br" aria-hidden="true"></span>
@@ -613,7 +625,7 @@
   function load() {
     if (done) return; done = true;
     var s = document.createElement("script");
-    s.src = "main.min.js?v=20261026i";
+    s.src = "main.min.js?v=20261027a";
     document.body.appendChild(s);
   }
   requestAnimationFrame(function () { setTimeout(load, 0); });

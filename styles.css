@@ -33,9 +33,9 @@
 .horizon-photo-frame .portrait-corner { border-color: var(--brass); }
 .horizon-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(.86) sepia(.06) contrast(1.02); }
 @media (min-width: 720px) { .horizon-photo img { aspect-ratio: 21 / 9; object-position: 62% 22%; } }
-.horizon-photo picture { display: block; overflow: hidden; }
+.horizon-photo picture { display: block; overflow: hidden; background-color: rgba(178, 193, 184, .18); } /* a soft sea-coloured frame while the photo arrives */
 @media (prefers-reduced-motion: no-preference) {
-  .js .horizon-photo img { clip-path: inset(0 0 0 0); transform: none; transition: clip-path 1.5s var(--ease-expo), transform 2.2s var(--ease-out); }
+  .js .horizon-photo img { clip-path: inset(0 0 0 0); transform: none; transition: clip-path 1.1s var(--ease-expo), transform 1.6s var(--ease-out); }
   .js .horizon-photo:not(.is-in) img { clip-path: inset(0 100% 0 0); transform: scale(1.08); }
 }
 

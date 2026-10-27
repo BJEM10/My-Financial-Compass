@@ -45,7 +45,7 @@ Las carpetas marcadas "bloqueado" pueden subirse al servidor sin riesgo: `.htacc
 4. Antes de publicar un cambio de estilos o de JavaScript, subir el número de versión para que los visitantes reciban la versión nueva:
 
    ```
-   python tools/bump_version.py 20261026i 20261101a
+   python tools/bump_version.py 20261027a 20261101a
    ```
 
    (el primer valor es el actual — aparece como `?v=` en `src/index.src.html` — y el segundo, el nuevo).

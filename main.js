@@ -11,6 +11,8 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var BASE = doc.currentScript && doc.currentScript.src ? new URL(".", doc.currentScript.src).href : "";
+  // the same ?v= as main.min.js, so i18n.js can never come from an older cached build
+  var VER = ((doc.currentScript && doc.currentScript.src || "").match(/[?&]v=([^&#]+)/) || [])[1] || String(Date.now());
   var BRASS = "#8A8558";
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
   var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
@@ -170,16 +172,27 @@
       var n = $$(":scope > .reveal", el.parentNode).indexOf(el);
       if (n > 0) el.style.setProperty("--i", Math.min(n, 4));
     });
+    // the family photo wipes in only once its pixels are here (never a wipe over an empty frame)
+    function show(el) {
+      var img = el.hasAttribute("data-photo") && $("img", el);
+      if (img && !img.complete) {
+        var go = function () { el.classList.add("is-in"); };
+        img.addEventListener("load", go, { once: true });
+        img.addEventListener("error", go, { once: true });
+        return;
+      }
+      el.classList.add("is-in");
+    }
     if (!hasIO) { els.forEach(function (e) { e.classList.add("is-in"); }); return; }
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
+      entries.forEach(function (en) { if (en.isIntersecting) { show(en.target); io.unobserve(en.target); } });
     }, { threshold: 0.01, rootMargin: "0px 0px -6% 0px" });
     els.forEach(function (e) { io.observe(e); });
     setTimeout(function () {
       els.forEach(function (e) {
         if (e.classList.contains("is-in")) return;
         var s = e.closest("section") || e;
-        if (s.getBoundingClientRect().top < innerHeight && e.getBoundingClientRect().top < innerHeight) e.classList.add("is-in");
+        if (s.getBoundingClientRect().top < innerHeight && e.getBoundingClientRect().top < innerHeight) show(e);
       });
     }, 6000);
   }
@@ -486,7 +499,7 @@
     if (dictPromise) return dictPromise;
     dictPromise = new Promise(function (resolve, reject) {
       var s = doc.createElement("script");
-      s.src = BASE + "i18n.js?v=20261026c";
+      s.src = BASE + "i18n.js?v=" + VER;
       s.onload = function () { window.__MFC_I18N__ ? resolve(window.__MFC_I18N__) : reject(new Error("i18n")); };
       s.onerror = function () { dictPromise = null; reject(new Error("i18n")); };
       doc.head.appendChild(s);
@@ -516,10 +529,14 @@
     $$("[data-year]").forEach(function (el) { if (y > parseInt(el.textContent, 10)) el.textContent = String(y); });
   }
   var switching = false;
+  function markLang(lang) {
+    $$("[data-set-lang]").forEach(function (o) { if (o.getAttribute("data-set-lang") === lang) o.setAttribute("aria-current", "true"); else o.removeAttribute("aria-current"); });
+  }
   function setLang(lang) {
-    if (switching || lang === root.lang) return;
+    if (switching || lang === root.lang) { markLang(root.lang); return; }
     switching = true;
-    var opts = $$("[data-set-lang]");
+    markLang(lang); // the pill moves at once, even while the dictionary is still downloading
+    var link = $('[data-set-lang="' + lang + '"]');
     loadDict().then(function (all) {
       // keep the reader's place: remember where the section under the header sits
       var hh = headerH(), anchor = null, before = 0;
@@ -529,33 +546,39 @@
       }
       root.classList.add("i18n-fade");
       return wait(reduced ? 0 : 130).then(function () {
-        resetPendingSplits();
-        applyDict(all[lang]);
-        root.lang = lang;
-        opts.forEach(function (o) { if (o.getAttribute("data-set-lang") === lang) o.setAttribute("aria-current", "true"); else o.removeAttribute("aria-current"); });
-        if (state.menuLabel) state.menuLabel();
-        try { localStorage.setItem("mfc-lang", lang); } catch (e) {}
         try {
-          var u = new URL(location.href);
-          u.searchParams.set("lang", lang);
-          u.searchParams.delete("sent");
-          history.replaceState(null, "", u.pathname + u.search + u.hash);
-        } catch (e) {}
-        safe(initMission, "mission");
-        measure();
-        if (anchor) {
-          var delta = anchor.getBoundingClientRect().top - before;
-          if (Math.abs(delta) > 1) {
-            root.style.scrollBehavior = "auto";
-            scrollTo(0, scrollY + delta);
-            root.style.scrollBehavior = "";
+          resetPendingSplits();
+          applyDict(all[lang]);
+          root.lang = lang;
+          if (state.menuLabel) state.menuLabel();
+          try { localStorage.setItem("mfc-lang", lang); } catch (e) {}
+          try {
+            var u = new URL(location.href);
+            u.searchParams.set("lang", lang);
+            u.searchParams.delete("sent");
+            history.replaceState(null, "", u.pathname + u.search + u.hash);
+          } catch (e) {}
+          safe(initMission, "mission");
+          measure();
+          if (anchor) {
+            var delta = anchor.getBoundingClientRect().top - before;
+            if (Math.abs(delta) > 1) {
+              root.style.scrollBehavior = "auto";
+              scrollTo(0, scrollY + delta);
+              root.style.scrollBehavior = "";
+            }
           }
+          safe(initSplits, "splits");
+        } finally {
+          root.classList.remove("i18n-fade"); // never leave the text hidden, whatever happened above
         }
-        safe(initSplits, "splits");
-        root.classList.remove("i18n-fade");
       });
-    }).catch(function (e) { console.warn("[i18n]", e); })
-      .then(function () { switching = false; });
+    }).catch(function (e) {
+      // dictionary unreachable (offline, blocked…): the other language still exists as its own page
+      console.warn("[i18n]", e);
+      root.classList.remove("i18n-fade");
+      if (link && root.lang !== lang) location.href = link.href;
+    }).then(function () { switching = false; });
   }
   function initLang() {
     var box = $("[data-lang-switch]");
@@ -571,6 +594,15 @@
       e.preventDefault();
       setLang(o.getAttribute("data-set-lang"));
     });
+    // from now on the early click catcher in <head> lets clicks through to the handler above
+    window.__mfcSetLang = setLang;
+    var want = window.__mfcWant;
+    window.__mfcWant = null;
+    if (want) setLang(want);
+    // fetch the dictionary ahead of time (it is small), so the first switch is instant on phones too
+    var idle = window.requestIdleCallback || function (cb) { return setTimeout(cb, 1); };
+    var prefetch = function () { setTimeout(function () { idle(warm); }, 1500); };
+    if (doc.readyState === "complete") prefetch(); else addEventListener("load", prefetch, { once: true });
   }
 
   /* ================================================================ 14. late assets: the display face
