@@ -46,29 +46,51 @@
     location.replace(d.getAttribute("data-alt") + (q ? "?lang=" + want : "") + location.hash);
     return;
   }
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  // arriving from the EN / ES switch: no intro, and jump straight to the section the reader was on
+  var switched = null;
+  try { switched = sessionStorage.getItem("mfc-switch"); sessionStorage.removeItem("mfc-switch"); } catch (e) {}
+  if (switched) {
+    // sections below the fold start with estimated heights, so land again once the page has settled
+    // (unless the reader already moved)
+    d.style.scrollBehavior = "auto";
+    var moved = false, mark = function () { moved = true; };
+    ["wheel", "touchmove", "keydown", "pointerdown"].forEach(function (t) { addEventListener(t, mark, { passive: true, once: true }); });
+    var land = function () { var t = location.hash && document.getElementById(location.hash.slice(1)); if (t && !moved) t.scrollIntoView(); };
+    // every time the page height changes in the first seconds, land again
+    var ro = window.ResizeObserver ? new ResizeObserver(function () { land(); }) : null;
+    addEventListener("DOMContentLoaded", function () { land(); if (ro) ro.observe(document.body); });
+    addEventListener("load", function () {
+      land();
+      setTimeout(function () { land(); if (ro) ro.disconnect(); d.style.scrollBehavior = ""; }, 4000);
+    });
+  } else if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     var seen = null;
     try { seen = sessionStorage.getItem("mfc-intro"); } catch (e) {}
     d.className += seen ? " intro-short" : " intro-full";
     try { sessionStorage.setItem("mfc-intro", "1"); } catch (e) {}
   }
-  // EN / ES tapped before main.js is ready: don't reload the page (that restarts the intro and the scroll);
-  // show the choice at once and let main.js apply it in place as soon as it loads (window.__mfcWant).
+  // EN / ES: each language is its own static page, so the switch opens the other one (rewriting ~160
+  // texts in place made some browsers drop the tab). It keeps the reader's section and remembers the choice.
   d.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("[data-set-lang]");
-    if (!a || window.__mfcSetLang) return; // once main.js is up, its own handler takes the click
+    if (!a) return;
     e.preventDefault();
-    window.__mfcWant = a.getAttribute("data-set-lang");
+    var lang = a.getAttribute("data-set-lang");
+    if (lang === page) return;
     var all = document.querySelectorAll("[data-set-lang]");
     for (var i = 0; i < all.length; i++) { if (all[i] === a) all[i].setAttribute("aria-current", "true"); else all[i].removeAttribute("aria-current"); }
-    var href = a.href;
-    setTimeout(function () { if (window.__mfcWant && !window.__mfcSetLang) location.href = href; }, 5000); // JS never came: use the real page
+    var at = "", secs = document.querySelectorAll("main > section[id], footer[id]");
+    for (var k = 0; k < secs.length; k++) {
+      if (secs[k].getBoundingClientRect().bottom > 90) { at = k > 0 ? "#" + secs[k].id : ""; break; }
+    }
+    try { localStorage.setItem("mfc-lang", lang); sessionStorage.setItem("mfc-switch", "1"); } catch (e) {}
+    location.href = a.href.split("#")[0] + at;
   }, true);
 })();
 </script>
 <style><!--@include css/critical.css--></style>
-<link rel="preload" href="styles.min.css?v=20261027a" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="styles.min.css?v=20261027a"></noscript>
+<link rel="preload" href="styles.min.css?v=20261030a" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.min.css?v=20261030a"></noscript>
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="ui.skip">Skip to content</a>
@@ -341,7 +363,6 @@
       <h3 id="svc-1" class="feature-name" data-i18n="svc.1">My Financial Compass Independence Seminars &amp; Webinars</h3>
       <p class="feature-desc" data-i18n="svcd.1">My Financial Compass loves to provide in person seminars and online webinars workshops. These are gateways to financial learning, education, and freedom. We'll equip your clients, employees, Church or organization with the knowledge and tools to manage their money effectively and achieve their financial goals. Reach out to us, we provide our presentations online or in person throughout Virginia, Maryland, Pennsylvania.</p>
       <div class="feature-side">
-        <p class="feature-price">$750.00</p>
         <a class="btn" href="https://calendly.com/jacymac2326/my-financial-compass-intro" target="_blank" rel="noopener"><span data-i18n="ui.book">Book now</span><span class="sr-only" data-i18n="ui.newTab">(opens in a new tab)</span><svg class="i-needle" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5 10 8 8 14.5 6 8Z"/></svg></a>
       </div>
       <span class="feature-corner feature-corner--tl" aria-hidden="true"></span><span class="feature-corner feature-corner--br" aria-hidden="true"></span>
@@ -353,8 +374,8 @@
         <span class="row-rhumb" aria-hidden="true"></span>
       </details>
       <details class="row" name="svc">
-        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.3">Annuities</h3><span class="row-toggle" aria-hidden="true"></span></summary>
-        <div class="row-body"><p data-i18n="svcd.3">Secure your financial future with our Annuities service. We'll help you explore different annuity options and find the best solution to provide a steady stream of income during retirement.</p></div>
+        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.3">Annuities &amp; Life Insurance with Living Benefits</h3><span class="row-toggle" aria-hidden="true"></span></summary>
+        <div class="row-body"><p data-i18n="svcd.3">Secure your financial future and protect your family's. We'll help you explore annuity options that provide a steady stream of income during retirement, and find a life insurance policy with living benefits: a safety net for your loved ones, with valuable benefits you can use during your lifetime.</p></div>
         <span class="row-rhumb" aria-hidden="true"></span>
       </details>
       <details class="row" name="svc">
@@ -364,22 +385,12 @@
       </details>
       <details class="row" name="svc">
         <summary class="row-sum"><h3 class="row-name" data-i18n="svc.10">Small Business</h3><span class="row-toggle" aria-hidden="true"></span></summary>
-        <div class="row-body"><p data-i18n="svcd.10">Your business and your personal finances are connected. We'll help small business owners build healthy money habits, manage cash flow, and protect what they've built for themselves and their families.</p></div>
+        <div class="row-body"><p data-i18n="svcd.10">Your business finances and your personal finances shouldn't be tangled together. We help small business owners keep them separate and well managed, so both can keep working toward your goals.</p></div>
         <span class="row-rhumb" aria-hidden="true"></span>
       </details>
       <details class="row" name="svc">
         <summary class="row-sum"><h3 class="row-name" data-i18n="svc.5">Career Planning</h3><span class="row-toggle" aria-hidden="true"></span></summary>
         <div class="row-body"><p data-i18n="svcd.5">Getting ready to go into college? Don’t know what career field you want to specialize in? Want to find the right job for you? Transferring from active military or retiring from the military and don’t know how to transfer your military skills to civilian work? How to use your knowledge and skills to land your dream job? At My Financial Compass, we specialize on guiding, mentoring, preparing, and helping you land the job you want. Your future is in your hands, but with some guidance, you can be confident to heading in the right direction in your career and in Life.</p></div>
-        <span class="row-rhumb" aria-hidden="true"></span>
-      </details>
-      <details class="row" name="svc">
-        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.6">Life Insurance w/ Living Benefits</h3><span class="row-toggle" aria-hidden="true"></span></summary>
-        <div class="row-body"><p data-i18n="svcd.6">Protect your family's future and enjoy financial flexibility with our Life Insurance with Living Benefits. We'll help you find a policy that provides a safety net for your loved ones while offering valuable benefits you can use during your lifetime.</p></div>
-        <span class="row-rhumb" aria-hidden="true"></span>
-      </details>
-      <details class="row" name="svc">
-        <summary class="row-sum"><h3 class="row-name" data-i18n="svc.7">Family Protection Plan</h3><span class="row-toggle" aria-hidden="true"></span></summary>
-        <div class="row-body"><p data-i18n="svcd.7">Protect your loved ones' financial future with our Family Protection Plan. We'll help you assess your needs and develop a comprehensive plan to ensure your family is financially secure, no matter what the future holds.</p></div>
         <span class="row-rhumb" aria-hidden="true"></span>
       </details>
       <details class="row" name="svc">
@@ -425,7 +436,6 @@
         <label class="label" for="f-email"><span data-i18n="form.email">Email</span> <span class="req" data-i18n="form.required">(required)</span></label>
         <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="160" aria-describedby="e-email">
         <p class="field-error" id="e-email" data-i18n="form.err.email">Enter a valid email address, like name@domain.com.</p>
-        <label class="check"><input type="checkbox" name="newsletter" value="yes"><span class="check-box" aria-hidden="true"></span><span data-i18n="form.newsletter">Sign up for news and updates</span></label>
       </div>
       <div class="field-row field-row--pair">
         <div class="field">
@@ -440,12 +450,10 @@
               <option value="" data-i18n="form.servicePick">Select a service</option>
               <option value="seminars" data-i18n="svc.1">My Financial Compass Independence Seminars &amp; Webinars</option>
               <option value="retirement" data-i18n="svc.2">Retirement Planning</option>
-              <option value="annuities" data-i18n="svc.3">Annuities</option>
+              <option value="annuities-life" data-i18n="svc.3">Annuities &amp; Life Insurance with Living Benefits</option>
               <option value="business" data-i18n="svc.4">Business Planning</option>
               <option value="small-business" data-i18n="svc.10">Small Business</option>
               <option value="career" data-i18n="svc.5">Career Planning</option>
-              <option value="life-insurance" data-i18n="svc.6">Life Insurance w/ Living Benefits</option>
-              <option value="family-protection" data-i18n="svc.7">Family Protection Plan</option>
               <option value="debt" data-i18n="svc.8">Debt Reduction Planning</option>
               <option value="needs-analysis" data-i18n="svc.9">Financial Needs Analysis</option>
               <option value="not-sure" data-i18n="form.serviceUnsure">I'm not sure yet</option>
@@ -617,7 +625,6 @@
   <span data-str="menu" data-i18n="ui.menu">Menu</span>
   <span data-str="close" data-i18n="ui.close">Close</span>
 </div>
-<button class="intro-skip" type="button" hidden data-intro-skip data-i18n="ui.skipIntro">Skip intro</button>
 <script>
 /* main.js only adds behaviour on top of a complete page: it is fetched after the first paint */
 (function () {
@@ -625,7 +632,7 @@
   function load() {
     if (done) return; done = true;
     var s = document.createElement("script");
-    s.src = "main.min.js?v=20261027a";
+    s.src = "main.min.js?v=20261030a";
     document.body.appendChild(s);
   }
   requestAnimationFrame(function () { setTimeout(load, 0); });

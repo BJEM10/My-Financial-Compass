@@ -19,7 +19,7 @@ for f in OUT.glob("*.woff2"):
         shutil.copy2(f, SRC / f.name)
 
 text = ""
-for page in ("index.html", "es/index.html", "i18n.js"):
+for page in ("index.html", "es/index.html"):
     text += (ROOT / page).read_text(encoding="utf-8")
 text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", text)
 always = "".join(chr(c) for c in range(0x20, 0x7F)) + "áéíóúüñÁÉÍÓÚÜÑ¿¡—–·’‘“”…°©®•→↗×€"

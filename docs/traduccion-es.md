@@ -68,7 +68,7 @@ Trato: **usted** en toda la página. Nombres propios sin traducir (My Financial 
 **`ui.book`**
 
 - EN: Book now
-- ES: Reservar cita
+- ES: Agendar cita
 
 **`ui.newTab`**
 
@@ -129,11 +129,6 @@ Trato: **usted** en toda la página. Nombres propios sin traducir (My Financial 
 
 - EN: Close
 - ES: Cerrar
-
-**`ui.skipIntro`**
-
-- EN: Skip intro
-- ES: Saltar intro
 
 **`ui.brandHome`**
 
@@ -376,13 +371,13 @@ Trato: **usted** en toda la página. Nombres propios sin traducir (My Financial 
 
 **`svc.3`**
 
-- EN: Annuities
-- ES: Anualidades
+- EN: Annuities & Life Insurance with Living Benefits
+- ES: Anualidades y seguro de vida con beneficios en vida
 
 **`svcd.3`**
 
-- EN: Secure your financial future with our Annuities service. We'll help you explore different annuity options and find the best solution to provide a steady stream of income during retirement.
-- ES: Asegure su futuro financiero con nuestro servicio de Anualidades. Le ayudaremos a explorar distintas opciones de anualidades y a encontrar la mejor solución para recibir un flujo constante de ingresos durante su jubilación.
+- EN: Secure your financial future and protect your family's. We'll help you explore annuity options that provide a steady stream of income during retirement, and find a life insurance policy with living benefits: a safety net for your loved ones, with valuable benefits you can use during your lifetime.
+- ES: Asegure su futuro financiero y proteja el de su familia. Le ayudaremos a explorar opciones de anualidades que le den un flujo constante de ingresos durante su jubilación, y a encontrar un seguro de vida con beneficios en vida: una red de seguridad para sus seres queridos, con beneficios valiosos que puede usar en vida.
 
 **`svc.4`**
 
@@ -401,8 +396,8 @@ Trato: **usted** en toda la página. Nombres propios sin traducir (My Financial 
 
 **`svcd.10`**
 
-- EN: Your business and your personal finances are connected. We'll help small business owners build healthy money habits, manage cash flow, and protect what they've built for themselves and their families.
-- ES: Su negocio y sus finanzas personales están conectados. Ayudamos a los dueños de pequeñas empresas a crear buenos hábitos financieros, manejar su flujo de caja y proteger lo que han construido para ellos y sus familias.
+- EN: Your business finances and your personal finances shouldn't be tangled together. We help small business owners keep them separate and well managed, so both can keep working toward your goals.
+- ES: Las finanzas de su negocio y sus finanzas personales no deberían mezclarse. Ayudamos a los dueños de pequeñas empresas a mantenerlas separadas y bien administradas, para que ambas sigan ayudándole a alcanzar sus metas.
 
 **`svc.5`**
 
@@ -413,26 +408,6 @@ Trato: **usted** en toda la página. Nombres propios sin traducir (My Financial 
 
 - EN: Getting ready to go into college? Don’t know what career field you want to specialize in? Want to find the right job for you? Transferring from active military or retiring from the military and don’t know how to transfer your military skills to civilian work? How to use your knowledge and skills to land your dream job? At My Financial Compass, we specialize on guiding, mentoring, preparing, and helping you land the job you want. Your future is in your hands, but with some guidance, you can be confident to heading in the right direction in your career and in Life.
 - ES: ¿Se prepara para entrar a la universidad? ¿No sabe en qué campo profesional especializarse? ¿Quiere encontrar el trabajo adecuado para usted? ¿Está dejando el servicio militar activo o retirándose de las fuerzas armadas y no sabe cómo trasladar sus habilidades militares al trabajo civil? ¿Cómo usar sus conocimientos y habilidades para conseguir el trabajo de sus sueños? En My Financial Compass nos especializamos en guiarle, orientarle, prepararle y ayudarle a conseguir el trabajo que desea. Su futuro está en sus manos, pero con algo de orientación podrá avanzar con confianza en la dirección correcta en su carrera y en la vida.
-
-**`svc.6`**
-
-- EN: Life Insurance w/ Living Benefits
-- ES: Seguro de vida con beneficios en vida
-
-**`svcd.6`**
-
-- EN: Protect your family's future and enjoy financial flexibility with our Life Insurance with Living Benefits. We'll help you find a policy that provides a safety net for your loved ones while offering valuable benefits you can use during your lifetime.
-- ES: Proteja el futuro de su familia y disfrute de flexibilidad financiera con nuestro Seguro de vida con beneficios en vida. Le ayudaremos a encontrar una póliza que brinde una red de seguridad a sus seres queridos y que, al mismo tiempo, le ofrezca beneficios valiosos que puede usar en vida.
-
-**`svc.7`**
-
-- EN: Family Protection Plan
-- ES: Plan de protección familiar
-
-**`svcd.7`**
-
-- EN: Protect your loved ones' financial future with our Family Protection Plan. We'll help you assess your needs and develop a comprehensive plan to ensure your family is financially secure, no matter what the future holds.
-- ES: Proteja el futuro financiero de sus seres queridos con nuestro Plan de protección familiar. Le ayudaremos a evaluar sus necesidades y a desarrollar un plan integral para que su familia esté financieramente segura, pase lo que pase en el futuro.
 
 **`svc.8`**
 
@@ -505,11 +480,6 @@ Trato: **usted** en toda la página. Nombres propios sin traducir (My Financial 
 
 - EN: Enter a valid email address, like name@domain.com.
 - ES: Escriba un correo electrónico válido, como nombre@dominio.com.
-
-**`form.newsletter`**
-
-- EN: Sign up for news and updates
-- ES: Suscribirme para recibir noticias y novedades
 
 **`form.phone`**
 

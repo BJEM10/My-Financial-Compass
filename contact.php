@@ -3,7 +3,7 @@
 //
 // 1. Same-origin guard + POST only + honeypot + minimum fill time + per-IP rate limit.
 // 2. Server-side validation of the form fields:
-//    Name (First, Last) · Email (+ "Sign up for news and updates") · Phone (optional) · Service of interest (optional) · Message
+//    Name (First, Last) · Email · Phone (optional) · Service of interest (optional) · Message
 //    (no "I am a human!" question: bots are stopped by step 1, without asking the visitor anything)
 // 3. Emails the submission to the owner with PHP mail() (Hostinger supports it; Reply-To = the visitor).
 // 4. Keeps a copy in a protected file: ../mfc_contact.jsonl (above public_html) or datos/ (denied by .htaccess).
@@ -68,14 +68,12 @@ $last    = field('last_name', 80);
 $email   = field('email', 160);
 $message = field('message', 4000);
 $phone   = field('phone', 40);
-$news    = (($_POST['newsletter'] ?? '') === 'yes');
-$lang    = (($_POST['lang'] ?? 'en') === 'es') ? 'es' : 'en';
+$lang   = (($_POST['lang'] ?? 'en') === 'es') ? 'es' : 'en';
 // the <select> sends a slug; the owner reads the English service name
 $SERVICES = [
   'seminars' => 'My Financial Compass Independence Seminars & Webinars', 'retirement' => 'Retirement Planning',
-  'annuities' => 'Annuities', 'business' => 'Business Planning', 'small-business' => 'Small Business', 'career' => 'Career Planning',
-  'life-insurance' => 'Life Insurance w/ Living Benefits', 'family-protection' => 'Family Protection Plan',
-  'debt' => 'Debt Reduction Planning', 'needs-analysis' => 'Financial Needs Analysis', 'not-sure' => 'Not sure yet',
+  'annuities-life' => 'Annuities & Life Insurance with Living Benefits', 'business' => 'Business Planning',
+  'small-business' => 'Small Business', 'career' => 'Career Planning', 'debt' => 'Debt Reduction Planning', 'needs-analysis' => 'Financial Needs Analysis', 'not-sure' => 'Not sure yet',
 ];
 $service = $SERVICES[(string) ($_POST['service'] ?? '')] ?? '';
 
@@ -97,7 +95,6 @@ $row = [
   'email'      => $email,
   'phone'      => $phone,
   'service'    => $service,
-  'newsletter' => $news ? 'yes' : 'no',
   'message'    => $message,
   'language'   => $lang,
   'ip'         => $ip,
@@ -121,7 +118,6 @@ if (function_exists('mail')) {
         . "Email:      {$email}\n"
         . "Phone:      " . ($phone !== '' ? $phone : '—') . "\n"
         . "Service:    " . ($service !== '' ? $service : '—') . "\n"
-        . "Newsletter: " . ($news ? 'Yes — wants news and updates' : 'No') . "\n"
         . "Language:   " . ($lang === 'es' ? 'Spanish' : 'English') . "\n"
         . "Date:       {$row['date']}\n\n"
         . "Message:\n{$message}\n";

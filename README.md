@@ -5,7 +5,7 @@ HTML, CSS y JavaScript sin frameworks, más un formulario de contacto en PHP par
 
 - Inglés: `index.html`
 - Español: `es/index.html`
-- El botón **EN | ES** cambia de idioma sin recargar; la elección se recuerda en el navegador.
+- El botón **EN | ES** abre la página del otro idioma en la misma sección donde estaba el visitante, sin repetir la animación de entrada; la elección se recuerda en el navegador.
 
 ---
 
@@ -14,7 +14,7 @@ HTML, CSS y JavaScript sin frameworks, más un formulario de contacto en PHP par
 | Ruta | Qué es | ¿Se publica? |
 |---|---|---|
 | `index.html`, `es/index.html` | Páginas finales (generadas) | Sí |
-| `styles.min.css`, `main.min.js`, `i18n.js` | Estilos, comportamiento y textos de ambos idiomas (generados) | Sí |
+| `styles.min.css`, `main.min.js` | Estilos y comportamiento (generados) | Sí |
 | `assets/img/`, `assets/fonts/` | Imágenes y tipografías optimizadas | Sí |
 | `contact.php` | Envío del formulario de contacto | Sí |
 | `.htaccess`, `datos/.htaccess` | HTTPS, caché, compresión y bloqueo de carpetas privadas | Sí |
@@ -39,13 +39,13 @@ Las carpetas marcadas "bloqueado" pueden subirse al servidor sin riesgo: `.htacc
    python tools/build.py
    ```
 
-   Esto vuelve a crear `index.html`, `es/index.html`, `i18n.js`, `styles.min.css`, `main.min.js` y `docs/traduccion-es.md`.
+   Esto vuelve a crear `index.html`, `es/index.html`, `styles.min.css`, `main.min.js` y `docs/traduccion-es.md`.
    Si falta alguna traducción al español, el script avisa y no genera nada.
 
 4. Antes de publicar un cambio de estilos o de JavaScript, subir el número de versión para que los visitantes reciban la versión nueva:
 
    ```
-   python tools/bump_version.py 20261027a 20261101a
+   python tools/bump_version.py 20261030a 20261101a
    ```
 
    (el primer valor es el actual — aparece como `?v=` en `src/index.src.html` — y el segundo, el nuevo).
@@ -92,11 +92,10 @@ El año del copyright del pie se actualiza solo cada 1 de enero.
 
 1. **Nota de "traducción de cortesía"** al inicio de los términos en español (clave `terms.note`): redactada, falta aprobación.
 2. **Email en los términos:** el texto legal dice `info@myfinancialcompass.com` (.com); el resto del sitio usa `.org`. Se dejó tal cual.
-3. **Servicios:** se quitaron el filtro y las etiquetas por categoría; el seminario de $750 va destacado ("Featured program") y el resto en una lista desplegable con su descripción.
+3. **Servicios:** se quitaron el filtro, las etiquetas por categoría y todos los precios. El seminario va destacado ("Featured program") y el resto en una lista desplegable con su descripción. "Annuities" y "Life Insurance w/ Living Benefits" se unieron en un solo servicio, con texto combinado a partir de los dos originales; "Family Protection Plan" se eliminó.
 4. **Servicio "Small Business"**: nombre y descripción nuevos, no estaban en el sitio anterior:
-   *"Your business and your personal finances are connected. We'll help small business owners build healthy money habits, manage cash flow, and protect what they've built for themselves and their families."*
-5. **Formulario:** sin la pregunta "I am a human!"; campos nuevos opcionales **Phone** y **Service of interest**; línea de privacidad bajo el botón.
-6. **Casilla "Sign up for news and updates":** hoy solo queda anotada en el correo. Falta decidir a qué lista o herramienta (Mailchimp u otra) van esas personas.
-7. **Career Planning:** se respetó el texto original, incluidas expresiones como "specialize on" y "confident to heading". Se puede pulir si el cliente quiere.
+   *"Your business finances and your personal finances shouldn't be tangled together. We help small business owners keep them separate and well managed, so both can keep working toward your goals."*
+5. **Formulario:** sin la pregunta "I am a human!" ni la casilla "Sign up for news and updates"; campos nuevos opcionales **Phone** y **Service of interest**; línea de privacidad bajo el botón.
+6. **Career Planning:** se respetó el texto original, incluidas expresiones como "specialize on" y "confident to heading". Se puede pulir si el cliente quiere.
 
 Las traducciones completas, clave por clave, están en `docs/traduccion-es.md`.

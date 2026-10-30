@@ -11,11 +11,8 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var BASE = doc.currentScript && doc.currentScript.src ? new URL(".", doc.currentScript.src).href : "";
-  // the same ?v= as main.min.js, so i18n.js can never come from an older cached build
-  var VER = ((doc.currentScript && doc.currentScript.src || "").match(/[?&]v=([^&#]+)/) || [])[1] || String(Date.now());
   var BRASS = "#8A8558";
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
-  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   var hasIO = "IntersectionObserver" in window;
 
   var DEBUG = /[?&]mfcdebug\b/.test(location.search);
@@ -25,7 +22,6 @@
     if (DEBUG) console.log("[mfc] " + name + " " + (performance.now() - t).toFixed(1) + " ms");
   }
   function str(name) { var el = $('[data-str="' + name + '"]'); return el ? el.textContent : ""; }
-  function headerH() { var h = $(".site-header"); return h ? h.offsetHeight : 64; }
   function onView(el, fn, opts) {
     if (!el) return;
     if (!hasIO) { fn(el); return; }
@@ -41,13 +37,10 @@
   function initIntro() {
     var full = root.classList.contains("intro-full"), short = root.classList.contains("intro-short");
     if (!full && !short) { state.introDone = true; return; }
-    var skip = $("[data-intro-skip]");
     // The intro classes stay on <html> when it ends (removing a class from the root would restyle the whole
     // page): every keyframe uses 'backwards' fill, so each piece is back in its natural state by itself.
-    function finish(e) {
+    function finish() {
       if (state.introDone) return;
-      if (e) root.classList.remove("intro-full", "intro-short"); // skip: cut the animations short
-      if (skip) skip.hidden = true;
       state.introDone = true;
       onScroll();
     }
@@ -55,7 +48,6 @@
     var fcpEntry = performance.getEntriesByName ? performance.getEntriesByName("first-contentful-paint")[0] : null;
     var started = fcpEntry ? fcpEntry.startTime : performance.now();
     setTimeout(finish, Math.max(0, (full ? 2300 : 750) - (performance.now() - started)));
-    if (full && skip) { skip.hidden = false; skip.addEventListener("click", finish, { once: true }); }
   }
 
   /* ================================================================ 2. one scroll loop: bearing, header, voyage, parallax, scrubs */
@@ -250,10 +242,6 @@
       }, { rootMargin: "0px 0px 35% 0px", threshold: 0 });
     }
     $$("[data-split]").forEach(function (el) { if (!splitDone.has(el)) splitIO.observe(el); });
-  }
-  function resetPendingSplits() {
-    pending.forEach(function (r) { if (!r.done) { r.done = true; r.el.classList.remove("is-split", "is-revealed"); r.el.innerHTML = r.original; } });
-    pending = [];
   }
 
   /* ================================================================ 5. values: the star points N → E → S → W */
@@ -489,120 +477,16 @@
     doc.addEventListener("keydown", function (e) { if (e.key === "Escape" && isOpen()) close(true); });
     // the menu button disappears at the same width as in critical.css (.menu-toggle)
     matchMedia("(min-width: 1100px)").addEventListener("change", function (m) { if (m.matches && isOpen()) close(false); });
-    state.menuLabel = function () { if (label) label.textContent = isOpen() ? str("close") : str("menu"); };
   }
 
-  /* ================================================================ 13. language: EN / ES */
-  var dictPromise = null;
-  function loadDict() {
-    if (window.__MFC_I18N__) return Promise.resolve(window.__MFC_I18N__);
-    if (dictPromise) return dictPromise;
-    dictPromise = new Promise(function (resolve, reject) {
-      var s = doc.createElement("script");
-      s.src = BASE + "i18n.js?v=" + VER;
-      s.onload = function () { window.__MFC_I18N__ ? resolve(window.__MFC_I18N__) : reject(new Error("i18n")); };
-      s.onerror = function () { dictPromise = null; reject(new Error("i18n")); };
-      doc.head.appendChild(s);
-    });
-    return dictPromise;
-  }
-  function htmlText(html) { var t = doc.createElement("textarea"); t.innerHTML = html; return t.value; }
-  function applyDict(d) {
-    $$("[data-i18n]").forEach(function (el) {
-      var k = el.getAttribute("data-i18n");
-      if (!(k in d)) return;
-      if (el.tagName === "TITLE") doc.title = htmlText(d[k]);
-      else el.innerHTML = d[k];
-    });
-    $$("[data-i18n-attr]").forEach(function (el) {
-      el.getAttribute("data-i18n-attr").split(";").forEach(function (pair) {
-        var p = pair.split(":"), attr = p[0].trim(), k = (p[1] || "").trim();
-        if (k in d) el.setAttribute(attr, htmlText(d[k]));
-      });
-    });
-    setYear(); // the copyright line came back with the year written in the HTML
-  }
+  /* ================================================================ 13. language
+     EN / ES are two static pages; the switch itself lives in the inline <head> script (it works before this
+     file loads). Only the copyright year is left here. */
   // footer copyright: the HTML says the build year; the visitor's clock keeps it current
   // (only forward, so a device with a wrong clock can't show an older year)
   function setYear() {
     var y = new Date().getFullYear();
     $$("[data-year]").forEach(function (el) { if (y > parseInt(el.textContent, 10)) el.textContent = String(y); });
-  }
-  var switching = false;
-  function markLang(lang) {
-    $$("[data-set-lang]").forEach(function (o) { if (o.getAttribute("data-set-lang") === lang) o.setAttribute("aria-current", "true"); else o.removeAttribute("aria-current"); });
-  }
-  function setLang(lang) {
-    if (switching || lang === root.lang) { markLang(root.lang); return; }
-    switching = true;
-    markLang(lang); // the pill moves at once, even while the dictionary is still downloading
-    var link = $('[data-set-lang="' + lang + '"]');
-    loadDict().then(function (all) {
-      // keep the reader's place: remember where the section under the header sits
-      var hh = headerH(), anchor = null, before = 0;
-      for (var i = 0; i < sections.length; i++) {
-        var r = sections[i].getBoundingClientRect();
-        if (r.bottom > hh + 1) { anchor = sections[i]; before = r.top; break; }
-      }
-      root.classList.add("i18n-fade");
-      return wait(reduced ? 0 : 130).then(function () {
-        try {
-          resetPendingSplits();
-          applyDict(all[lang]);
-          root.lang = lang;
-          if (state.menuLabel) state.menuLabel();
-          try { localStorage.setItem("mfc-lang", lang); } catch (e) {}
-          try {
-            var u = new URL(location.href);
-            u.searchParams.set("lang", lang);
-            u.searchParams.delete("sent");
-            history.replaceState(null, "", u.pathname + u.search + u.hash);
-          } catch (e) {}
-          safe(initMission, "mission");
-          measure();
-          if (anchor) {
-            var delta = anchor.getBoundingClientRect().top - before;
-            if (Math.abs(delta) > 1) {
-              root.style.scrollBehavior = "auto";
-              scrollTo(0, scrollY + delta);
-              root.style.scrollBehavior = "";
-            }
-          }
-          safe(initSplits, "splits");
-        } finally {
-          root.classList.remove("i18n-fade"); // never leave the text hidden, whatever happened above
-        }
-      });
-    }).catch(function (e) {
-      // dictionary unreachable (offline, blocked…): the other language still exists as its own page
-      console.warn("[i18n]", e);
-      root.classList.remove("i18n-fade");
-      if (link && root.lang !== lang) location.href = link.href;
-    }).then(function () { switching = false; });
-  }
-  function initLang() {
-    var box = $("[data-lang-switch]");
-    if (!box) return;
-    // the options are real links to the other language's page; with JavaScript the text swaps in place
-    var warm = function () { loadDict().catch(function () {}); };
-    box.addEventListener("pointerenter", warm, { once: true });
-    box.addEventListener("focusin", warm, { once: true });
-    box.addEventListener("touchstart", warm, { once: true, passive: true });
-    box.addEventListener("click", function (e) {
-      var o = e.target.closest("[data-set-lang]");
-      if (!o) return;
-      e.preventDefault();
-      setLang(o.getAttribute("data-set-lang"));
-    });
-    // from now on the early click catcher in <head> lets clicks through to the handler above
-    window.__mfcSetLang = setLang;
-    var want = window.__mfcWant;
-    window.__mfcWant = null;
-    if (want) setLang(want);
-    // fetch the dictionary ahead of time (it is small), so the first switch is instant on phones too
-    var idle = window.requestIdleCallback || function (cb) { return setTimeout(cb, 1); };
-    var prefetch = function () { setTimeout(function () { idle(warm); }, 1500); };
-    if (doc.readyState === "complete") prefetch(); else addEventListener("load", prefetch, { once: true });
   }
 
   /* ================================================================ 14. late assets: the display face
@@ -627,7 +511,7 @@
     safe(initIntro, "intro");
     safe(initLateAssets, "assets");
     // the rest, one short task each (nothing here may block the main thread for long)
-    var tasks = [[initScroll, "scroll"], [initLang, "lang"], [initMenu, "menu"], [captureRose, "rose"], [initReveals, "reveals"],
+    var tasks = [[initScroll, "scroll"], [initMenu, "menu"], [captureRose, "rose"], [initReveals, "reveals"],
       [initForm, "form"], [initServices, "services"], [initValues, "values"], [initLegs, "legs"], [initMission, "mission"],
       [initCounters, "counters"], [initPort, "port"], [initSplits, "splits"], [setYear, "year"]];
     var idle = window.requestIdleCallback || function (cb) { return setTimeout(cb, 16); };

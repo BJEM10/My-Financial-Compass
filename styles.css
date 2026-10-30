@@ -171,7 +171,6 @@
 .feature-name { font-family: var(--serif); font-weight: 400; font-size: clamp(1.75rem, 3.6vw, 3.1rem); line-height: 1.06; letter-spacing: -.02em; color: var(--ink); max-width: 25ch; font-variation-settings: "opsz" 120; }
 .feature-desc { max-width: 60ch; }
 .feature-side { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; margin-top: 8px; padding-top: 22px; border-top: 1px solid rgba(46, 52, 52, .16); }
-.feature-price { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1; color: var(--ink); font-variant-numeric: lining-nums; }
 .feature-corner { position: absolute; width: 22px; height: 22px; border: 0 solid var(--brass); }
 .feature-corner--tl { top: -6px; left: -6px; border-width: 1.5px 0 0 1.5px; }
 .feature-corner--br { bottom: -6px; right: -6px; border-width: 0 1.5px 1.5px 0; }
@@ -380,8 +379,6 @@
 .js [data-draw-line] path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--ease-in-out); }
 .js [data-draw-line].is-in path { stroke-dashoffset: 0; }
 .js [data-draw-line].is-in .ticks { transition-delay: .5s; }
-.i18n-fade [data-i18n] { opacity: 0; transition: opacity .12s ease-out; }
-[data-i18n] { transition: opacity .14s ease-in; }
 
 /* =============================================================== 7. Reduced motion: no travel, short fades only */
 @media (prefers-reduced-motion: reduce) {
