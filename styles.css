@@ -175,11 +175,14 @@
 .feature-corner--tl { top: -6px; left: -6px; border-width: 1.5px 0 0 1.5px; }
 .feature-corner--br { bottom: -6px; right: -6px; border-width: 0 1.5px 1.5px 0; }
 @media (min-width: 960px) {
-  .feature { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "kicker side" "name side" "desc side"; column-gap: clamp(40px, 6vw, 96px); align-content: start; }
-  .feature-kicker { grid-area: kicker; }
-  .feature-name { grid-area: name; }
-  .feature-desc { grid-area: desc; }
-  .feature-side { grid-area: side; flex-direction: column; flex-wrap: nowrap; align-items: flex-end; justify-content: flex-end; gap: 22px; margin: 0; padding: 0 0 0 clamp(32px, 4vw, 56px); border-top: 0; border-left: 1px solid rgba(46, 52, 52, .16); }
+  /* two balanced columns: the title on the left; the description with its call to action on the right,
+     behind one continuous hairline (no row gap, so the line never breaks) */
+  .feature { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "kicker desc" "name desc" "name side"; gap: 0; align-items: start; }
+  .feature-kicker { grid-area: kicker; margin-bottom: 18px; padding-right: clamp(32px, 4vw, 64px); }
+  .feature-name { grid-area: name; max-width: none; padding-right: clamp(32px, 4vw, 64px); }
+  .feature-desc, .feature-side { padding-left: clamp(32px, 4vw, 64px); border-left: 1px solid rgba(46, 52, 52, .16); }
+  .feature-desc { grid-area: desc; max-width: none; }
+  .feature-side { grid-area: side; align-self: stretch; align-items: flex-start; justify-content: flex-start; margin: 0; padding-top: 28px; border-top: 0; }
 }
 .ledger { border-top: 1.5px solid var(--ink); }
 .row { position: relative; border-bottom: 1px solid rgba(46, 52, 52, .16); }
